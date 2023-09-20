@@ -1,0 +1,40 @@
+.home-title{
+    background-color: #ca67fc;
+    color: white;
+    width: 400px;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin: 10px auto;
+}
+.flex-contanier{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+   
+}
+.add-task-list{
+    min-width: 500px;
+}
+.text-center{
+    text-align: center;
+}
+.add-task{
+    margin: 10px auto;
+}
+.task-input{
+    width: 200px;
+    display: block;
+    margin: 30px auto;
+    padding: 15px 30px;
+    border-radius: 20px;
+    border: 1px solid #b3ccff;
+}
+.btn-task{
+    display: block;
+    margin: 10px auto;
+    padding: 10px 40px;
+    border: none;
+    background-color: #ca67fc;
+    border-radius: 30px;
+}
