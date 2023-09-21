@@ -21,8 +21,22 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: 100px;
+  max-width: 100px;
   text-align: center;
   border-radius: 0 10px 0 0;
-  background-color:  #009900;
+  background-color:  #9707cf;
+  color: white;
+  padding: 5px 5px;
 }
+.remove-task{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: blue;
+}
+
+
+
+
+
+

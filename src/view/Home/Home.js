@@ -1,37 +1,77 @@
 import './Home.css'
 import TaskCard from './../../component/TaskCard/TaskCard'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 const Home =()=>
 {
 
 
-    const [tasks,setTasks]=useState([
+    const [tasksList,setTasksList]=useState([
        
     ])
+    useEffect(()=>{
+        const getListFromLocalStroage=JSON.parse(localStorage.getItem('task'))
+        setTasksList(getListFromLocalStroage)
+    },[])
 
    const [title,setTitle]=useState('')
    const [discription,setDiscription]=useState('')
    const [priority,setPriority]=useState('')
 
-   function addToTaskBar(){
-    const id=Math.ceil( Math.random()*1000 );
+   const saveTOLocalStorage=(task)=>{
+    localStorage.setItem('task',JSON.stringify(task))
+
+   }
+
+   const addToTaskBar=()=>{
+    if(title==='' && discription==='' && priority===''){
+        return
+    }
+    const random = Math.ceil( Math.random()*1000 );
     const obj={
-        id:id,
+        id:random,
         title:title,
         discription:discription,
-        priority:priority
+        priority:priority,
+       
        }
+   
 
+       const newtask=[...tasksList,obj]
     
-      setTasks([...tasks,obj])
+      setTasksList(newtask)
+
+
+      setDiscription('')
+      setPriority('')
+      setTitle('')
+
+      saveTOLocalStorage(newtask)
+     
      
    }
 
+  const removeFromTaskBar=(id)=>{
+    let index;
+    tasksList.forEach((task,i)=>{
+        if(task.id===id){
+            index=i
+        }
+    })
+
+
+    const tempArr=tasksList;
+    tempArr.splice(index,1)
+    setTasksList([...tempArr])
+
+    saveTOLocalStorage(tempArr)
+  }
+
+
     return(<>
-        <div>
-            <h1 className='home-title'>Daily Task 🎯</h1>
+        <div className='home-main-container'>
+            <h1 className='home-title'>DailyDocket 🎯</h1>
             <div className='flex-contanier'>
                    <div className='add-task-list'>
                           <h3 className='text-center'>Add task List</h3>
@@ -59,7 +99,7 @@ const Home =()=>
                                          <button 
                                           className='btn-task'
                                           type='button'
-                                          onClick={addToTaskBar}
+                                         onClick={addToTaskBar}
                                           >
                                             Add Task
                                             </button>
@@ -70,11 +110,18 @@ const Home =()=>
                    <div className='add-task-list'>
                           <h3 className='text-center'>Show task list</h3>
                           {
-                           tasks.map((task)=>{
-                            const{id , title, discription, priority}=task;
-                            return <TaskCard title={title} discription={discription} priority={priority} />
-                           })
-                          }
+                             tasksList.map((task,i)=>{
+                                const {title,discription,priority,id}=task;
+                                return  <TaskCard 
+                                title={title} 
+                                discription={discription} 
+                                priority={priority}
+                                 id={id} 
+                                 key={i}
+                                 removeFromTaskBar={removeFromTaskBar}
+                                 />
+                             })
+                          } 
                    </div>
             </div>
         </div>

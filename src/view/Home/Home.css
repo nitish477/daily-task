@@ -9,9 +9,9 @@
 }
 .flex-contanier{
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-   
 }
 .add-task-list{
     min-width: 500px;
@@ -38,3 +38,9 @@
     background-color: #ca67fc;
     border-radius: 30px;
 }
+
+
+
+
+
+
