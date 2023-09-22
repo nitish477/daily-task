@@ -28,17 +28,21 @@
     margin: 30px auto;
     padding: 15px 30px;
     border-radius: 20px;
-    border: 1px solid #b3ccff;
+    border: 1px solid  rgb(163, 61, 247);;
 }
 .btn-task{
     display: block;
-    margin: 10px auto;
-    padding: 10px 40px;
+    margin: 10px 20px;
+    padding: 10px 20px;
     border: none;
     background-color: #ca67fc;
     border-radius: 30px;
 }
 
+.btn-contanier{
+    display: flex;
+    justify-content: center;
+}
 
 
 

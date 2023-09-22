@@ -1,6 +1,6 @@
 import './TaskCard.css'
 
-export default function TaskHome({title,discription,id,priority,removeFromTaskBar}){
+export default function TaskHome({title,discription,id,priority,removeFromTaskBar,setTaskEdit}){
     return (<>
     
        <div className='task-contanier'>
@@ -10,7 +10,11 @@ export default function TaskHome({title,discription,id,priority,removeFromTaskBa
            <span className='remove-task' onClick={()=>
         {
             removeFromTaskBar(id)
-        }} >❌</span>
+        }} ><i className="fa-solid fa-trash"></i></span>
+           <span className='edit-task' onClick={()=>
+        {
+            setTaskEdit(id)
+        }} ><i className="fa-solid fa-pen-to-square"></i></span>
        </div>
 
     </>)

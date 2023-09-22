@@ -12,22 +12,22 @@ const Home =()=>
     ])
     useEffect(()=>{
         const getListFromLocalStroage=JSON.parse(localStorage.getItem('task'))
+       if(getListFromLocalStroage && getListFromLocalStroage.length>0){
         setTasksList(getListFromLocalStroage)
+       }
     },[])
-
+   const [isEdit,setIsEdit]=useState(false)
    const [title,setTitle]=useState('')
    const [discription,setDiscription]=useState('')
    const [priority,setPriority]=useState('')
+   const [id,setId]=useState(0)
 
    const saveTOLocalStorage=(task)=>{
     localStorage.setItem('task',JSON.stringify(task))
-
    }
 
    const addToTaskBar=()=>{
-    if(title==='' && discription==='' && priority===''){
-        return
-    }
+
     const random = Math.ceil( Math.random()*1000 );
     const obj={
         id:random,
@@ -52,6 +52,57 @@ const Home =()=>
      
    }
 
+   const setTaskEdit=(id)=>{
+    setIsEdit(true)
+    setId(id);
+        let currentEditTask;
+        tasksList.forEach((taskId,i)=>{
+            if(taskId.id===id){
+              currentEditTask=taskId;
+            }
+        })
+
+       
+       setTitle(currentEditTask.title)
+       setDiscription(currentEditTask.discription)
+       setPriority(currentEditTask.priority)
+         
+       
+   }
+
+   const updateTask=()=>{
+    let updatedTaskList;
+
+    tasksList.forEach((task,i)=>{
+        if(task.id===id){
+            updatedTaskList=i;
+        }
+    })
+
+
+    const UpdateArr=tasksList;
+
+    UpdateArr[updatedTaskList]={
+        id:id,
+       title:title,
+       discription:discription,
+       priority:priority
+    }
+
+    setTasksList([...UpdateArr])
+
+    saveTOLocalStorage([...UpdateArr]);
+
+    setId(0)
+    setTitle('')
+    setDiscription('')
+    setPriority('')
+
+    setIsEdit(false)
+
+
+   }
+
   const removeFromTaskBar=(id)=>{
     let index;
     tasksList.forEach((task,i)=>{
@@ -74,7 +125,9 @@ const Home =()=>
             <h1 className='home-title'>DailyDocket 🎯</h1>
             <div className='flex-contanier'>
                    <div className='add-task-list'>
-                          <h3 className='text-center'>Add task List</h3>
+                          <h3 className='text-center'>{ 
+                                isEdit?`Update Task${id}`:'Task List'
+                            }</h3>
 
                             <div className='add-task'>
                                 <form>
@@ -96,19 +149,33 @@ const Home =()=>
                                          placeholder="Enter priority"
                                          className='task-input'
                                          />
-                                         <button 
+                
+                                        <div className='btn-contanier'>
+                                         {
+                                            isEdit?   <button 
+                                            className='btn-task'
+                                            type='button'
+                                           onClick={updateTask}
+                                            >
+                                              Update 
+                                              </button>:  <button 
                                           className='btn-task'
                                           type='button'
                                          onClick={addToTaskBar}
                                           >
                                             Add Task
                                             </button>
+                                         }
+
+                                        </div>
                                 </form>
                             </div>
 
                    </div>
                    <div className='add-task-list'>
-                          <h3 className='text-center'>Show task list</h3>
+                          <h3 className='text-center'>
+                           Task List
+                          </h3>
                           {
                              tasksList.map((task,i)=>{
                                 const {title,discription,priority,id}=task;
@@ -119,6 +186,7 @@ const Home =()=>
                                  id={id} 
                                  key={i}
                                  removeFromTaskBar={removeFromTaskBar}
+                                 setTaskEdit={setTaskEdit}
                                  />
                              })
                           } 
