@@ -9,12 +9,11 @@
 }
 .flex-contanier{
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .add-task-list{
-    min-width: 500px;
+  width: 500px;
 }
 .text-center{
     text-align: center;
@@ -34,6 +33,7 @@
     display: block;
     margin: 10px 20px;
     padding: 10px 20px;
+    width: 100px;
     border: none;
     background-color: #ca67fc;
     border-radius: 30px;
@@ -43,8 +43,57 @@
     display: flex;
     justify-content: center;
 }
+.Card-holder{
+    
+    padding: 10px;
+    height: 200px;
+    width: fit-content;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
 
 
 
 
+  @media (max-width: 768px) {
+    .home-title {
+        width: 100%;
+    }
 
+    .flex-container {
+        flex-direction: column;
+    }
+
+    .add-task-list {
+        width: 100%;
+    }
+
+    .text-center {
+        text-align: left;
+    }
+
+    .add-task {
+        margin: 10px 0;
+    }
+
+    .task-input {
+        width: 100%;
+    }
+
+    .btn-task {
+        width: 100%;
+    }
+
+    .btn-container {
+        justify-content: flex-start;
+    }
+
+    .Card-holder {
+        height: 100%;
+    }
+}
