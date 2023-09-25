@@ -38,11 +38,11 @@ const Home =()=>
     let index;
 
     tasksList.forEach((task,i)=>{
-        if(task.id===id){
+        if(task.id===taskId){
             index=i;
         }
     })
-       return index
+        return index
    }
 
    const checkrequideFields=()=>{
@@ -97,13 +97,10 @@ const Home =()=>
    const setTaskEdit=(id)=>{
     setIsEdit(true)
     setId(id);
-        let currentEditTask;
-        tasksList.forEach((task,i)=>{
-            if(task.id===id){
-              currentEditTask=task;
-            }
-        })
+       
       
+       const index=findId(id);
+       const currentEditTask=tasksList[index]
 
        
        setTitle(currentEditTask.title)
@@ -143,13 +140,7 @@ const Home =()=>
    }
 
   const removeFromTaskBar=(id)=>{
-    let index;
-
-    tasksList.forEach((task,i)=>{
-        if(task.id===id){
-            index=i;
-        }
-    })
+    const index= findId(id)
 
     const tempArr=tasksList;
     tempArr.splice(index,1)
