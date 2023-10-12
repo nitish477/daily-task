@@ -117,6 +117,14 @@ const Home =()=>
 
 
     const UpdateArr=tasksList;
+    if(!UpdateArr[updatedTaskList]){
+         showToast('Task Not Found for Update', 'alert', 3000);
+         setTitle('')
+         setDiscription('');
+         setPriority('')
+         setIsEdit(false)
+         return
+    }
 
     UpdateArr[updatedTaskList]={
         id:id,
